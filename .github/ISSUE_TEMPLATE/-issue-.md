@@ -1,7 +1,7 @@
 ---
 name: "[issue]"
 about: 이슈를 작성해주세요
-title: ''
+title: "[Issue]"
 labels: Group:server
 assignees: ''
 
