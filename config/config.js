@@ -1,4 +1,5 @@
-require('dotenv').config();
+const path = require('path');
+require('dotenv').config(path.join(__dirname, '../.env'));
 const env = process.env.NODE_ENV || 'development';
 const username = process.env.username || "root";
 const password = process.env.password;
