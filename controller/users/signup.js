@@ -1,10 +1,10 @@
-const users = require('../../models/users');
+const {User} = require('../../models');
 
 module.exports = {
     post: async (req, res) => {
         const { name, password } = req.body;
 
-        let [user, created] = await users.findOrCreate({
+        let [users, created] = await User.findOrCreate({
             where: {
                 name
             },

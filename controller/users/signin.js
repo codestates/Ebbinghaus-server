@@ -1,9 +1,9 @@
-const { users } = require('../../models/users');
+const { User } = require('../../models');
 
 module.exports = async (req, res) => {
     const { name, password } = req.body;
 
-    let user = await users.findOne({
+    let user = await User.findOne({
         where: {
             name,
             password
@@ -18,5 +18,4 @@ module.exports = async (req, res) => {
     return res.status(200).json({
         message: "Success signin"
     })
-
 }
