@@ -5,7 +5,7 @@ module.exports = async (req, res) => {
 
     let [users, created] = await users.findOrCreate({
         where: {
-            ID
+            ID 
         },
         defaults: {
             password
