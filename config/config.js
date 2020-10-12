@@ -6,27 +6,27 @@ const host = process.env.host || "127.0.0.1";
 const port = process.env.port || "3306"
 
 module.exports = {
-  "development": {
+  development: {
     username,
-    "database": "ebbinghaus_development",
+    database: "ebbinghaus_development",
     password,
     host,
-    "dialect": "mysql"
+    dialect: "mysql"
   },
-  "test": {
+  test: {
     username,
-    "database": "ebbinghaus_test",
+    database: "ebbinghaus_test",
     password,
     host,
     port,
-    "dialect": "mysql"
+    dialect: "mysql"
   },
-  "production": {
+  production: {
     username,
-    "database": "ebbinghaus_production",
+    database: "ebbinghaus_production",
     password,
     host,
     port,
-    "dialect": "mysql"
+    dialect: "mysql"
   }
 }[env]
