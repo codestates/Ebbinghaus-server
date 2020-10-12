@@ -1,16 +1,19 @@
 const express = require('express');
-const cookieParser = require('cookie-parser');
-//const session = require('express-session');
 const morgan = require('morgan');
 const usersRouter = require('./routes/users');
+const bodyParser = require('body-parser');
+
+//const cookieParser = require('cookie-parser');
+//const session = require('express-session');
 
 //require('dotenv').config();
 
 const app = express();
 const port = 4000;
 
-app.use(cookieParser());
+//app.use(cookieParser());
 app.use(morgan('dev'));
+app.use(bodyParser.json())
 
 app.get('/', (req,res) => {
    res.status(200).send('Success')

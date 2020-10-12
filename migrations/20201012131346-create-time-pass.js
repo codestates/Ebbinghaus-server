@@ -1,29 +1,23 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('TimePasses', {
+    await queryInterface.createTable('time_passes', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      users_priority_world_id: {
+      user_priority_word_id: {
         type: Sequelize.INTEGER
       },
-      MineWords_id: {
+      mine_word_id: {
         type: Sequelize.INTEGER
       },
       check_in: {
         type: Sequelize.DATE
       },
       check_out: {
-        type: Sequelize.DATE
-      },
-      created_at: {
-        type: Sequelize.DATE
-      },
-      updated_at: {
         type: Sequelize.DATE
       },
       createdAt: {
@@ -37,6 +31,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('TimePasses');
+    await queryInterface.dropTable('time_passes');
   }
 };

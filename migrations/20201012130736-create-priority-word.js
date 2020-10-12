@@ -1,14 +1,11 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('completedWords', {
+    await queryInterface.createTable('priorityWords', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
-      },
-      user_id: {
         type: Sequelize.INTEGER
       },
       word_eng: {
@@ -16,6 +13,9 @@ module.exports = {
       },
       word_kor: {
         type: Sequelize.STRING
+      },
+      distinguish: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
@@ -28,6 +28,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('completedWords');
+    await queryInterface.dropTable('priorityWords');
   }
 };
