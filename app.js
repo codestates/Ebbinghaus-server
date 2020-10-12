@@ -4,17 +4,12 @@ const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const usersRouter = require('./routes/users');
 
-require('dotenv').config();
+//require('dotenv').config();
 
 const app = express();
 const port = 4000;
 
-app.use(express.json());
 app.use(cookieParser());
-
-
-
-
 app.use(morgan('dev'));
 
 app.get('/', (req,res) => {
@@ -22,8 +17,6 @@ app.get('/', (req,res) => {
 })
 
 app.use('/user', usersRouter);
-
-
 
 app.set('port', port);
 app.listen(port, () => {
