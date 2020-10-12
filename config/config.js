@@ -8,14 +8,14 @@ const port = process.env.port || "3306"
 module.exports = {
   "development": {
     username,
-    "database": "mohaji_development",
+    "database": "ebbinghaus_development",
     password,
     host,
     "dialect": "mysql"
   },
   "test": {
     username,
-    "database": "mohaji_test",
+    "database": "ebbinghaus_test",
     password,
     host,
     port,
@@ -23,7 +23,7 @@ module.exports = {
   },
   "production": {
     username,
-    "database": "mohaji_production",
+    "database": "ebbinghaus_production",
     password,
     host,
     port,

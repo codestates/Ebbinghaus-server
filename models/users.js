@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       this.hasMany(db.minewords, { foreignKey: "user_id", sourceKey: "id" })
       this.hasMany(db.completedwords, { foreignKey: "user_id", sourceKey: "id" })
-
+      this.hasMany(db.users_priority_word, { foreignKey: "user_id", sourceKey: "id" })
     }
   };
   Users.init({

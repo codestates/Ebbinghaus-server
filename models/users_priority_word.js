@@ -3,25 +3,24 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class PriorityWords extends Model {
+  class users_priority_word extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(db) {
-      this.hasMany(db.users_priority_word, { foreignKey: "priority_word_id", sourceKey: "id" })
-
       // define association here
+      this.belongsTo(db.users, { foreignKey: "user_id", targetKey: "id" });
+      this.belongsTo(db.prioritywords, { foreignKey: "priority_word_id", targetKey: "id" });
     }
   };
-  PriorityWords.init({
-    word_eng: DataTypes.STRING,
-    word_kor: DataTypes.STRING,
-    distinguish: DataTypes.INTEGER
+  users_priority_word.init({
+    user_id: DataTypes.INTEGER,
+    priority_word_id: DataTypes.STRING
   }, {
     sequelize,
-    modelName: 'PriorityWords',
+    modelName: 'users_priority_word',
   });
-  return PriorityWords;
+  return users_priority_word;
 };
