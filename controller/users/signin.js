@@ -1,11 +1,11 @@
-const { users } = require('../../models');
+const { users } = require('../../models/users');
 
 module.exports = async (req, res) => {
-    const { ID, password } = req.body;
+    const { name, password } = req.body;
 
     let user = await users.findOne({
         where: {
-            ID,
+            name,
             password
         }
     });
@@ -14,7 +14,7 @@ module.exports = async (req, res) => {
         return res.status(404).json({
             message: "Email does not exist"
         })
-    } 
+    }
     return res.status(200).json({
         message: "Success signin"
     })
