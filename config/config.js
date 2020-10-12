@@ -2,13 +2,13 @@ require('dotenv').config();
 const env = process.env.NODE_ENV || 'development';
 const username = process.env.username || "root";
 const password = process.env.password;
-const host = process.env.host || "ebbinghaus.c98clmwx1rag.ap-northeast-2.rds.amazonaws.com";
-const port = process.env.port || "13306"
+const host = process.env.host || "127.0.0.1";
+const port = process.env.port || "3306"
 
 module.exports = {
   "development": {
     username,
-    "database": "ebbing_dev",
+    "database": "mohaji_development",
     password,
     host,
     "dialect": "mysql"
