@@ -5,7 +5,8 @@ module.exports = async (req, res) => {
 
     let user = await users.findOne({
         where: {
-            email,
+            ID,
+            password
         }
     });
 

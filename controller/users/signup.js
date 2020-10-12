@@ -3,7 +3,7 @@ const { users } = require('../../models');
 module.exports = async (req, res) => {
     const { ID, password } = req.body;
 
-    let [users, created] = await users.findOrCreate({
+    let [user, created] = await users.findOrCreate({
         where: {
             ID 
         },
