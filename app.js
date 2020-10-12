@@ -4,9 +4,13 @@ const morgan = require('morgan');
 const app = express();
  const port = 4000;
 
- app.get('/', (req,res) => {
-    res.status(200).send('Hello World!')
+
+app.use(morgan('dev'));
+
+app.get('/', (req,res) => {
+   res.status(200).send('Success')
 })
+
 
 app.set('port', port);
 app.listen(port, () => {
