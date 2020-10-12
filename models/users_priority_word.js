@@ -11,8 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(db) {
       // define association here
-      this.belongsTo(db.users, { foreignKey: "user_id", targetKey: "id" });
-      this.belongsTo(db.prioritywords, { foreignKey: "priority_word_id", targetKey: "id" });
+      this.belongsTo(db.users, { foreignKey: "user_id", targetKey: "id", onDelete: 'CASCADE' });
+      this.belongsTo(db.prioritywords, { foreignKey: "priority_word_id", targetKey: "id", onDelete: 'CASCADE' });
     }
   };
   users_priority_word.init({
