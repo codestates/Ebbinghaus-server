@@ -13,7 +13,6 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       this.belongsTo(db.users, { foreignKey: "user_id", targetKey: "id" });
       this.belongsTo(db.prioritywords, { foreignKey: "priority_word_id", targetKey: "id" });
-
     }
   };
   users_priority_word.init({
