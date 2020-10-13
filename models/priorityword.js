@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class priorityWord extends Model {
     /**
@@ -11,17 +9,21 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.hasMany(models.user_priority_word, { foreignKey: 'priority_word_id' })
-
+      this.hasMany(models.user_priority_word, {
+        foreignKey: "priority_word_id",
+      });
     }
-  };
-  priorityWord.init({
-    word_eng: DataTypes.STRING,
-    word_kor: DataTypes.STRING,
-    distinguish: DataTypes.INTEGER
-  }, {
-    sequelize,
-    modelName: 'priorityWord',
-  });
+  }
+  priorityWord.init(
+    {
+      word_eng: DataTypes.STRING,
+      word_kor: DataTypes.STRING,
+      distinguish: DataTypes.INTEGER,
+    },
+    {
+      sequelize,
+      modelName: "priorityWord",
+    }
+  );
   return priorityWord;
 };
