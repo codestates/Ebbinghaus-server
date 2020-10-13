@@ -1,8 +1,6 @@
-'use strict';
+"use strict";
 
-const {
-  Model
-} = require('sequelize');
+const { Model } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
   class mineWord extends Model {
@@ -14,19 +12,20 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       this.belongsTo(models.user, { foreignKey: "user_id" });
-      this.hasMany(models.time_pass, { foreignKey: 'mine_word_id' })
-
-
+      this.hasMany(models.time_pass, { foreignKey: "mine_word_id" });
     }
-  };
-  mineWord.init({
-    user_id: DataTypes.INTEGER,
-    word_eng: DataTypes.STRING,
-    word_kor: DataTypes.STRING,
-    distinguish: DataTypes.INTEGER
-  }, {
-    sequelize,
-    modelName: 'mineWord',
-  });
+  }
+  mineWord.init(
+    {
+      user_id: DataTypes.INTEGER,
+      word_eng: DataTypes.STRING,
+      word_kor: DataTypes.STRING,
+      distinguish: DataTypes.INTEGER,
+    },
+    {
+      sequelize,
+      modelName: "mineWord",
+    }
+  );
   return mineWord;
 };
