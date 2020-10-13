@@ -1,32 +1,26 @@
-require('dotenv').config();
-const env = process.env.NODE_ENV || 'development';
-const username = process.env.username || "root";
-const password = process.env.password;
-const host = process.env.host || "127.0.0.1";
-const port = process.env.port || "3306"
+
+require('dotenv').config()
 
 module.exports = {
   development: {
-    username,
-    database: "ebbinghaus_development",
-    password,
-    host,
-    dialect: "mysql"
+    username: 'root',
+    password: process.env.DATABASE_PASSWORD,
+    database: 'ebbinghaus_development',
+    host: 'localhost',
+    dialect: 'mysql'
   },
   test: {
-    username,
-    database: "ebbinghaus_test",
-    password,
-    host,
-    port,
-    dialect: "mysql"
+    username: 'root',
+    password: process.env.DATABASE_PASSWORD,
+    database: 'ebbinghaus_development',
+    host: 'localhost',
+    dialect: 'mysql'
   },
   production: {
-    username,
-    database: "ebbinghaus_production",
-    password,
-    host,
-    port,
-    dialect: "mysql"
+    username: 'root',
+    password: process.env.DATABASE_PASSWORD,
+    database: 'ebbinghaus_development',
+    host: 'localhost',
+    dialect: 'mysql'
   }
-}[env]
+}

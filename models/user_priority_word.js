@@ -3,24 +3,22 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class completedWords extends Model {
+  class user_priority_word extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(db) {
+    static associate(models) {
       // define association here
-
     }
   };
-  completedWords.init({
+  user_priority_word.init({
     user_id: DataTypes.INTEGER,
-    word_eng: DataTypes.STRING,
-    word_kor: DataTypes.STRING
+    priority_word_id: DataTypes.STRING
   }, {
     sequelize,
-    modelName: 'completedWords',
+    modelName: 'user_priority_word',
   });
-  return completedWords;
+  return user_priority_word;
 };
