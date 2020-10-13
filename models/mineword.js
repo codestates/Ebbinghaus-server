@@ -1,7 +1,9 @@
 'use strict';
+
 const {
   Model
 } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class mineWord extends Model {
     /**
@@ -11,7 +13,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.belongsTo(models.user, { foreignKey: "user_id", targetKey: "id" });
+      this.belongsTo(models.user, { foreignKey: "user_id" });
+      this.hasMany(models.time_pass, { foreignKey: 'mine_word_id' })
+
 
     }
   };
