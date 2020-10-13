@@ -1,4 +1,4 @@
 module.exports = {
   usersController: require("./users"),
-  //wordsController: require('./words')
+  wordsController: require("./words"),
 };
