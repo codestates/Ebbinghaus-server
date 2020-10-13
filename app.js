@@ -2,10 +2,10 @@ require("dotenv").config();
 const express = require("express");
 const morgan = require("morgan");
 const usersRouter = require("./routes/users");
-//const wordsRouter = require('./routes/words');
+const wordsRouter = require("./routes/words");
 const bodyParser = require("body-parser");
 const secret = process.env.sessSecret;
-//const cookieParser = require('cookie-parser');
+const cookieParser = require("cookie-parser");
 const session = require("express-session");
 
 const app = express();
@@ -21,14 +21,14 @@ app.use(
 
 app.use(morgan("dev"));
 app.use(bodyParser.json());
-//app.use(cookieParser());
+app.use(cookieParser());
 
 app.get("/", (req, res) => {
   res.status(200).send("Success");
 });
 
 app.use("/user", usersRouter);
-//app.use('/word', wordsRouter);
+app.use("/word", wordsRouter);
 
 app.set("port", port);
 app.listen(port, () => {
