@@ -17,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
 
     }
   };
+
   time_pass.init({
     user_priority_word_id: DataTypes.INTEGER,
     mine_word_id: DataTypes.INTEGER,
