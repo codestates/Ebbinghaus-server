@@ -1,4 +1,5 @@
 "use strict";
+const { hooksController } = require("../moduleStorage");
 
 const { Model } = require("sequelize");
 
@@ -23,6 +24,19 @@ module.exports = (sequelize, DataTypes) => {
       level: DataTypes.INTEGER,
     },
     {
+      hooks: {
+        beforeCreate: (data) => {
+          if (data.password) {
+            data.password = hooksController.password(data.password);
+          }
+        },
+        beforeFind: (data) => {
+          if (data.where.password) {
+            console.log(data.where.password);
+            data.where.password = hooksController.password(data.where.password);
+          }
+        },
+      },
       sequelize,
       modelName: "user",
     }
