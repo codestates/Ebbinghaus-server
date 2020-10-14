@@ -11,7 +11,7 @@ module.exports = {
     let { userid } = req.session;
     if (userid) {
       let data = await user.findOne({
-        where: { id: userid.id },
+        where: { id: userid },
         include: [
           {
             model: mineWord,
@@ -21,13 +21,12 @@ module.exports = {
             model: mineWord,
             include: {
               model: word_eng,
-              word_kor,
             },
           },
         ],
       });
 
-      let mineWordOfUser = data.mineWord.map((val) => val.mineWord_id);
+      let mineWordOfUser = data.mineWords.map((val) => val.mineWord_id);
       let userInfo = {
         mineWord: mineWordOfUser,
       };

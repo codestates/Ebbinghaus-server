@@ -1,33 +1,33 @@
-const { mineWord } = require("../../models");
+const { user, mineWord } = require("../../models");
 
 module.exports = {
-  get: async (req, res) => {
+  get: (req, res) => {
     let { userid } = req.session;
     if (userid) {
-      let data = await user.findOne({
-        // where: { id: userid.id },
-        include: [
-          {
-            model: mineWord,
+      console.log("user:", userid);
+      user
+        .findOne({
+          where: {
+            id: userid.id,
           },
-
-          {
-            model: mineWord,
-            include: {
-              model: word_eng,
-              word_kor,
-            },
-          },
-        ],
-      });
-
-      let mineWordOfUser = data.mineWord.map((val) => val.mineWord_id);
-      let userInfo = {
-        mineWord: mineWordOfUser,
-      };
-      res.status(200).json(userInfo);
-    } else {
-      res.status(404).send("session not fonud");
+        })
+        .then((data) => {
+          mineWord
+            .findAll({
+              raw: true,
+              where: {
+                user_id: data.id,
+              },
+            })
+            .then((data) => {
+              if (data) {
+                res.status(200).json(data);
+              } else {
+                res.status(404).send("잘못됬어");
+              }
+            })
+            .catch((err) => console.error("error", err));
+        });
     }
   },
 };
