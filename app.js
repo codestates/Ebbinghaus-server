@@ -6,7 +6,6 @@ const wordsRouter = require("./routes/words");
 const bodyParser = require("body-parser");
 const secret = process.env.SESS_SECRET;
 const session = require("express-session");
-
 const app = express();
 const port = 4000;
 
