@@ -10,7 +10,7 @@ module.exports = {
       req.session.userid = { id: users.id };
       res.status(200).json(users.name);
     } else {
-      res.status(404).send("User is not invalid.");
+      res.status(401).send("User is not invalid.");
     }
   },
 };
