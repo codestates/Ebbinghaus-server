@@ -6,7 +6,7 @@ module.exports = {
     password: process.env.DATABASE_PASSWORD,
     database: "ebbinghausDB",
     host: "ebbinghaus.c98clmwx1rag.ap-northeast-2.rds.amazonaws.com",
-    post: 13306,
+    port: 13306,
     dialect: "mysql",
   },
   test: {
