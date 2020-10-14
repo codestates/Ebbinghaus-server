@@ -3,11 +3,12 @@ const { mineWord } = require("../../models");
 module.exports = {
   post: async (req, res) => {
     let { userid } = req.session;
-    console.log("userid", req.session.userid);
+    // console.log("userid", req.session.userid);
     let { word_eng, word_kor } = req.body;
 
     if (userid) {
       let data = await mineWord.create({
+        user_id: userid.id,
         word_eng: word_eng,
         word_kor: word_kor,
       });
