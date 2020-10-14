@@ -11,6 +11,7 @@ module.exports = {
         user_id: userid.id,
         word_eng: word_eng,
         word_kor: word_kor,
+        distinguish: 99,
       });
       console.log("result:", data);
       res.status(201).json(data);
