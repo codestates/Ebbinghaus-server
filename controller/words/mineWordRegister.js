@@ -1,19 +1,17 @@
 const { mineWord } = require("../../models");
 
 module.exports = {
-  // post: (req, res) => {
-  //   const { user_id } = req.params.id;
-  //   const { word_eng, word_kor, distinguish } = req.body;
-  // },
   post: async (req, res) => {
     let { userid } = req.session;
+    console.log("userid", req.session.userid);
     let { word_eng, word_kor } = req.body;
+
     if (userid) {
       let data = await mineWord.create({
         word_eng: word_eng,
         word_kor: word_kor,
-        user_id: userid.id,
       });
+      console.log("result:", data);
       res.status(201).json(data);
     } else {
       res.status(400).send("잘못된 요청입니다.");

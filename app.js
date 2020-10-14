@@ -4,8 +4,7 @@ const morgan = require("morgan");
 const usersRouter = require("./routes/users");
 const wordsRouter = require("./routes/words");
 const bodyParser = require("body-parser");
-const secret = process.env.sessSecret;
-const cookieParser = require("cookie-parser");
+const secret = process.env.SESS_SECRET;
 const session = require("express-session");
 
 const app = express();
@@ -21,7 +20,6 @@ app.use(
 
 app.use(morgan("dev"));
 app.use(bodyParser.json());
-app.use(cookieParser());
 
 app.get("/", (req, res) => {
   res.status(200).send("Success");
