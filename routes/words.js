@@ -7,6 +7,6 @@ router.post("/mine/register", wordsController.mineWordRegister.post);
 
 router.get("/mine", wordsController.mineWordList.get);
 
-router.post("/mine/test", wordsController.mineTest.post);
+router.post("/mine/test-register", wordsController.mineTestRegister.post);
 
 module.exports = router;
