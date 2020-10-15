@@ -2,12 +2,12 @@ require("dotenv").config();
 
 module.exports = {
   development: {
-    username: "ebbingTeam",
+    username: "root",
     password: process.env.DATABASE_PASSWORD,
-    database: "ebbinghausDB",
-    host: "ebbinghaus.c98clmwx1rag.ap-northeast-2.rds.amazonaws.com",
-    port: 13306,
+    database: "ebbinghaus_development",
+    host: "localhost",
     dialect: "mysql",
+    //port: 13306,
   },
   test: {
     username: "root",
