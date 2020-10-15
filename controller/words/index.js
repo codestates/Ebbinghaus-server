@@ -1,4 +1,5 @@
 module.exports = {
   mineWordRegister: require("./mineWordRegister"),
-  mineWordRead: require("./mineWordRead"),
+  mineWordList: require("./mineWordList"),
+  mineTestRegister: require("./mineTestRegister"),
 };
