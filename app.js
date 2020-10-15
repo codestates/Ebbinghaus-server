@@ -6,11 +6,8 @@ const wordsRouter = require("./routes/words");
 const bodyParser = require("body-parser");
 const session = require("express-session");
 const secret = process.env.SESS_SECRET;
-const cookieParser = require("cookie-parser");
 const app = express();
 const port = 4000;
-
-app.use(cookieParser(secret));
 
 app.use(
   session({
@@ -24,10 +21,7 @@ app.use(morgan("dev"));
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
-  if (req.cookies) {
-    console.log("Cookie:", req.cookies);
-    res.status(200).send("Success");
-  }
+  res.status(200).send("Success");
 });
 
 app.use("/user", usersRouter);
