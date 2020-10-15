@@ -16,12 +16,23 @@ module.exports = {
         })
         .then((data) => {
           //mineword distinguish 값 0으로 변경
-          mineWord.update({
-            distinguish: 0,
-            where: {
-              id: data.id,
+          mineWord.update(
+            {
+              distinguish: 0,
             },
-          });
+            {
+              where: {
+                id: data.id,
+              },
+            }
+          );
+        });
+
+      mineWord
+        .findOne({
+          where: {
+            word_eng: word_eng,
+          },
         })
         .then((data) => {
           time_pass.create({
