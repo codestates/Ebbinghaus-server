@@ -3,6 +3,7 @@ const express = require("express");
 const morgan = require("morgan");
 const usersRouter = require("./routes/users");
 const wordsRouter = require("./routes/words");
+const wordTestRouter = require("./routes/wordTest");
 const bodyParser = require("body-parser");
 const session = require("express-session");
 const secret = process.env.SESS_SECRET;
@@ -26,6 +27,7 @@ app.get("/", (req, res) => {
 
 app.use("/user", usersRouter);
 app.use("/word", wordsRouter);
+app.use("/test", wordTestRouter);
 
 app.set("port", port);
 app.listen(port, () => {
