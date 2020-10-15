@@ -1,5 +1,5 @@
 "use strict";
-const { hooksController } = require("../moduleStorage");
+const { hooksController } = require("../lib");
 
 const { Model } = require("sequelize");
 
