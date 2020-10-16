@@ -6,6 +6,7 @@ module.exports = {
 
     if (userid) {
       let { word_eng } = req.body;
+      var tDate = new Date();
 
       mineWord
         .findOne({
@@ -18,7 +19,8 @@ module.exports = {
             mineWord.update(
               {
                 distinguish: 1,
-                //checkout: ??
+                check_out: tDate.setDate(tDate.getDate() + 1),
+                // date.setDate(date.getDate + 1)
               },
               {
                 where: {
@@ -31,7 +33,7 @@ module.exports = {
             mineWord.update(
               {
                 distinguish: 3,
-                //checkout: ??
+                check_out: tDate.setDate(tDate.getDate() + 3),
               },
               {
                 where: {
@@ -44,7 +46,7 @@ module.exports = {
             mineWord.update(
               {
                 distinguish: 7,
-                //checkout: ??
+                check_out: tDate.setDate(tDate.getDate() + 7),
               },
               {
                 where: {
@@ -57,7 +59,7 @@ module.exports = {
             mineWord.update(
               {
                 distinguish: 15,
-                //checkout: ??
+                check_out: tDate.setDate(tDate.getDate() + 15),
               },
               {
                 where: {
@@ -70,7 +72,7 @@ module.exports = {
             mineWord.update(
               {
                 distinguish: 30,
-                //checkout: ??
+                check_out: tDate.setDate(tDate.getDate() - 100),
               },
               {
                 where: {

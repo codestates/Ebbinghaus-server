@@ -7,6 +7,7 @@ module.exports = {
     database: "ebbinghaus_development",
     host: "localhost",
     dialect: "mysql",
+    timezone: "+09:00",
     //port: 13306,
   },
   test: {
