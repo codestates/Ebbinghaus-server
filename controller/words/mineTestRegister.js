@@ -28,17 +28,17 @@ module.exports = {
           );
         });
 
-      mineWord
-        .findOne({
-          where: {
-            word_eng: word_eng,
-          },
-        })
-        .then((data) => {
-          time_pass.create({
-            mine_word_id: data.id,
-          });
-        });
+      // mineWord
+      //   .findOne({
+      //     where: {
+      //       word_eng: word_eng,
+      //     },
+      //   })
+      //   .then((data) => {
+      //     time_pass.create({
+      //       mine_word_id: data.id,
+      //     });
+      //   });
 
       res.status(201).json("register test success");
     } else {

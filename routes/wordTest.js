@@ -6,6 +6,6 @@ const { wordTestController } = require("../controller");
 router.get("/", wordTestController.testing.get);
 
 //시험 단어 통과
-//router.post("/test/pass", wordTestController.passTest.post);
+router.post("/pass", wordTestController.passTest.post);
 
 module.exports = router;
