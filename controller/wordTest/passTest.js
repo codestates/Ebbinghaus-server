@@ -72,7 +72,7 @@ module.exports = {
             mineWord.update(
               {
                 distinguish: 30,
-                check_out: tDate.setDate(tDate.getDate() - 100),
+                check_out: tDate.setDate(tDate.getDate() + 30),
               },
               {
                 where: {
