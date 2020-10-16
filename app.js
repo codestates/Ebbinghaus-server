@@ -6,10 +6,21 @@ const wordsRouter = require("./routes/words");
 const wordTestRouter = require("./routes/wordTest");
 const bodyParser = require("body-parser");
 const session = require("express-session");
+const cors = require("cors");
+
 const secret = process.env.SESS_SECRET;
+
 const app = express();
 const port = 4000;
 
+app.use(morgan("dev"));
+app.use(bodyParser.json());
+app.use(
+  cors({
+    origin: true,
+    credentials: true,
+  })
+);
 app.use(
   session({
     secret,
@@ -17,9 +28,6 @@ app.use(
     saveUninitialized: true,
   })
 );
-
-app.use(morgan("dev"));
-app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
   res.status(200).send("Success");
