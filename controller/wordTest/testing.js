@@ -3,23 +3,30 @@ const { user, mineWord, time_pass } = require("../../models");
 //   console.log("userid", req.session.userid);
 //   time_pass.findAll({ raw: true }).then((data) => {
 //     console.log("data", data);
-mineWord
-  .findAll({
-    raw: true,
-    where: {
-      distinguish: 0,
-    },
-    // where: {  checkout: 0, },
-  })
-  .then((data2) => {
-    if (data2) {
-      res.status(200).json(data2);
-    } else {
-      res.status(404).send("잘못됬어");
+module.exports = {
+  get: (req, res) => {
+    let { userid } = req.session;
+    if (userid) {
+      mineWord
+        .findAll({
+          raw: true,
+          where: {
+            distinguish: 0,
+          },
+          // where: {  checkout: 0, },
+        })
+        .then((data2) => {
+          if (data2) {
+            res.status(200).json(data2);
+          } else {
+            res.status(404).send("잘못됬어");
+          }
+        })
+        .catch((err) => console.error("error", err));
+      //   });
     }
-  })
-  .catch((err) => console.error("error", err));
-//   });
+  },
+};
 
 //일단 time passes에 있는 모든값을 부르기
 //가져올 단어는 timepassed.mineword_id의 필드!
