@@ -1,9 +1,12 @@
-
 const { user, mineWord, time_pass } = require("../../models");
 
-      //   console.log("userid", req.session.userid);
-      //   time_pass.findAll({ raw: true }).then((data) => {
-      //     console.log("data", data);
+//   console.log("userid", req.session.userid);
+//   time_pass.findAll({ raw: true }).then((data) => {
+//     console.log("data", data);
+module.exports = {
+  get: (req, res) => {
+    let { userid } = req.session;
+    if (userid) {
       mineWord
         .findAll({
           raw: true,
@@ -53,4 +56,3 @@ const { user, mineWord, time_pass } = require("../../models");
 //           }
 //         })
 //         .catch((err) => console.error("error", err));
-
