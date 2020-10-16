@@ -121,7 +121,7 @@ module.exports = {
                     user_id: data.id,
                     distinguish: 15,
                     check_out: {
-                      [sequelize.Op.lt]: dDate.setDate(dDate.getDate() - 16),
+                      [sequelize.Op.lt]: dDate.setDate(dDate.getDate() - 15),
                     },
                   },
                 }
@@ -150,7 +150,7 @@ module.exports = {
                     user_id: data.id,
                     distinguish: 30,
                     check_out: {
-                      [sequelize.Op.lt]: eDate.setDate(eDate.getDate() - 32),
+                      [sequelize.Op.lt]: eDate.setDate(eDate.getDate() - 28),
                     },
                   },
                 }
@@ -224,19 +224,19 @@ module.exports = {
 //         })
 //         .catch((err) => console.error("error", err));
 
-const insertCheckout = async (data2) => {
-  await data2.forEach((checkOutName) => {
-    if (checkOutName) {
-      mineWord
-        .findOne({
-          raw: true,
-          where: {
-            check_out: checkOutName,
-          },
-        })
-        .then((data) => {
-          return data.check_out;
-        });
-    }
-  });
-};
+// const insertCheckout = async (data2) => {
+//   await data2.forEach((checkOutName) => {
+//     if (checkOutName) {
+//       mineWord
+//         .findOne({
+//           raw: true,
+//           where: {
+//             check_out: checkOutName,
+//           },
+//         })
+//         .then((data) => {
+//           return data.check_out;
+//         });
+//     }
+//   });
+// };

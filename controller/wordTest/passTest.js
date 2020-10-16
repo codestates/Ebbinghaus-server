@@ -33,7 +33,7 @@ module.exports = {
             mineWord.update(
               {
                 distinguish: 3,
-                check_out: tDate.setDate(tDate.getDate() + 3),
+                check_out: tDate.setDate(tDate.getDate() + 2),
               },
               {
                 where: {
@@ -46,7 +46,7 @@ module.exports = {
             mineWord.update(
               {
                 distinguish: 7,
-                check_out: tDate.setDate(tDate.getDate() + 7),
+                check_out: tDate.setDate(tDate.getDate() + 4),
               },
               {
                 where: {
@@ -59,7 +59,7 @@ module.exports = {
             mineWord.update(
               {
                 distinguish: 15,
-                check_out: tDate.setDate(tDate.getDate() + 15),
+                check_out: tDate.setDate(tDate.getDate() + 8),
               },
               {
                 where: {
@@ -72,7 +72,7 @@ module.exports = {
             mineWord.update(
               {
                 distinguish: 30,
-                check_out: tDate.setDate(tDate.getDate() + 30),
+                check_out: tDate.setDate(tDate.getDate() + 15),
               },
               {
                 where: {
