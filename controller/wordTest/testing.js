@@ -1,4 +1,5 @@
 const { user, mineWord, time_pass } = require("../../models");
+const sequelize = require("sequelize");
 
 //   console.log("userid", req.session.userid);
 //   time_pass.findAll({ raw: true }).then((data) => {
@@ -6,23 +7,189 @@ const { user, mineWord, time_pass } = require("../../models");
 module.exports = {
   get: (req, res) => {
     let { userid } = req.session;
+
     if (userid) {
-      mineWord
-        .findAll({
-          raw: true,
+      var aDate = new Date();
+      var bDate = new Date();
+      var cDate = new Date();
+      var dDate = new Date();
+      var eDate = new Date();
+
+      //첫번째 distinguish 낮추기
+      user
+        .findOne({
           where: {
-            distinguish: 0,
+            id: userid.id,
           },
-          // where: {  checkout: 0, },
         })
-        .then((data2) => {
-          if (data2) {
-            res.status(200).json(data2);
-          } else {
-            res.status(404).send("잘못됬어");
+        .then((data) => {
+          if (data) {
+            mineWord
+              .update(
+                {
+                  distinguish: 0,
+                },
+                {
+                  where: {
+                    user_id: data.id,
+                    distinguish: 1,
+                    check_out: {
+                      [sequelize.Op.lt]: aDate.setDate(aDate.getDate() - 2),
+                    },
+                  },
+                }
+              )
+              .catch((err) => console.error("error", err));
+            // console.log("data5", data5);
           }
+        });
+
+      //두번째 distinguish 낮추기
+      user
+        .findOne({
+          where: {
+            id: userid.id,
+          },
         })
-        .catch((err) => console.error("error", err));
+        .then((data) => {
+          if (data) {
+            mineWord
+              .update(
+                {
+                  distinguish: 1,
+                },
+                {
+                  where: {
+                    user_id: data.id,
+                    distinguish: 3,
+                    check_out: {
+                      [sequelize.Op.lt]: bDate.setDate(bDate.getDate() - 4),
+                    },
+                  },
+                }
+              )
+              .catch((err) => console.error("error", err));
+            // console.log("data5", data5);
+          }
+        });
+
+      //세번째 distinguish 낮추기
+      user
+        .findOne({
+          where: {
+            id: userid.id,
+          },
+        })
+        .then((data) => {
+          if (data) {
+            mineWord
+              .update(
+                {
+                  distinguish: 3,
+                },
+                {
+                  where: {
+                    user_id: data.id,
+                    distinguish: 7,
+                    check_out: {
+                      [sequelize.Op.lt]: cDate.setDate(cDate.getDate() - 8),
+                    },
+                  },
+                }
+              )
+              .catch((err) => console.error("error", err));
+            // console.log("data5", data5);
+          }
+        });
+
+      //네번째 distinguish 낮추기
+      user
+        .findOne({
+          where: {
+            id: userid.id,
+          },
+        })
+        .then((data) => {
+          if (data) {
+            mineWord
+              .update(
+                {
+                  distinguish: 7,
+                },
+                {
+                  where: {
+                    user_id: data.id,
+                    distinguish: 15,
+                    check_out: {
+                      [sequelize.Op.lt]: dDate.setDate(dDate.getDate() - 16),
+                    },
+                  },
+                }
+              )
+              .catch((err) => console.error("error", err));
+            // console.log("data5", data5);
+          }
+        });
+
+      //다섯번째 distinguish 낮추기
+      user
+        .findOne({
+          where: {
+            id: userid.id,
+          },
+        })
+        .then((data) => {
+          if (data) {
+            mineWord
+              .update(
+                {
+                  distinguish: 15,
+                },
+                {
+                  where: {
+                    user_id: data.id,
+                    distinguish: 30,
+                    check_out: {
+                      [sequelize.Op.lt]: eDate.setDate(eDate.getDate() - 32),
+                    },
+                  },
+                }
+              )
+              .catch((err) => console.error("error", err));
+            // console.log("data5", data5);
+          }
+        });
+
+      user
+        .findOne({
+          where: {
+            id: userid.id,
+          },
+        })
+        .then((data1) => {
+          mineWord
+            .findAll({
+              raw: true,
+              where: {
+                user_id: data1.id,
+                check_out: {
+                  [sequelize.Op.lt]: new Date(),
+                },
+                // check_out: < new Date()
+              },
+              // where: {  checkout: 0, },
+            })
+            .then((data2) => {
+              // console.log("체크아웃", data2);
+              if (data2) {
+                res.status(200).json(data2);
+              } else {
+                res.status(404).send("잘못됬어");
+              }
+            })
+            .catch((err) => console.error("error", err));
+        });
+
       //   });
     }
   },
@@ -56,3 +223,20 @@ module.exports = {
 //           }
 //         })
 //         .catch((err) => console.error("error", err));
+
+const insertCheckout = async (data2) => {
+  await data2.forEach((checkOutName) => {
+    if (checkOutName) {
+      mineWord
+        .findOne({
+          raw: true,
+          where: {
+            check_out: checkOutName,
+          },
+        })
+        .then((data) => {
+          return data.check_out;
+        });
+    }
+  });
+};
