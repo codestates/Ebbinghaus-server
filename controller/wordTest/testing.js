@@ -160,6 +160,7 @@ module.exports = {
           }
         });
 
+      //테스트 실행
       user
         .findOne({
           where: {
