@@ -4,7 +4,6 @@ module.exports = {
   get: (req, res) => {
     let { userid } = req.session;
     if (userid) {
-      console.log("user:", userid);
       user
         .findOne({
           where: {

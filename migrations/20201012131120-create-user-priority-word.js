@@ -14,6 +14,15 @@ module.exports = {
       priority_word_id: {
         type: Sequelize.STRING,
       },
+      distinguish: {
+        type: Sequelize.INTEGER,
+      },
+      check_in: {
+        type: Sequelize.DATE,
+      },
+      check_out: {
+        type: Sequelize.DATE,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
