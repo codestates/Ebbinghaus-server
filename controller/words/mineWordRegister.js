@@ -5,7 +5,7 @@ module.exports = {
     let { userid } = req.session;
     // console.log("userid", req.session.userid);
     let { word_eng, word_kor } = req.body;
-
+    console.log("바디값", req.body);
     if (userid) {
       let data = await mineWord.create({
         user_id: userid.id,

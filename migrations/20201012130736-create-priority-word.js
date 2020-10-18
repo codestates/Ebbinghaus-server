@@ -14,9 +14,6 @@ module.exports = {
       word_kor: {
         type: Sequelize.STRING,
       },
-      distinguish: {
-        type: Sequelize.INTEGER,
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

@@ -14,7 +14,6 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       this.hasMany(models.mineWord, { foreignKey: "user_id" });
       this.hasMany(models.user_priority_word, { foreignKey: "user_id" });
-      this.hasMany(models.completedWord, { foreignKey: "user_id" });
     }
   }
   user.init(
