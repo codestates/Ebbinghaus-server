@@ -16,7 +16,9 @@ module.exports = {
               raw: true,
               where: {
                 user_id: data.id,
+                distinguish: 99,
               },
+              order: [["id", "DESC"]],
             })
             .then((data) => {
               if (data) {

@@ -12,7 +12,7 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       priority_word_id: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
       },
       distinguish: {
         type: Sequelize.INTEGER,
