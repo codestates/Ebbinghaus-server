@@ -5,6 +5,7 @@ const usersRouter = require("./routes/users");
 const wordsRouter = require("./routes/words");
 const wordTestRouter = require("./routes/wordTest");
 const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const cors = require("cors");
 
@@ -14,6 +15,7 @@ const app = express();
 const port = 4000;
 
 app.use(morgan("dev"));
+app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(
   cors({
@@ -25,7 +27,7 @@ app.use(
   session({
     secret,
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
   })
 );
 

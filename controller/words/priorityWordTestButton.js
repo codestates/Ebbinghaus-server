@@ -3,13 +3,12 @@ const sequelize = require("sequelize");
 
 module.exports = {
   get: (req, res) => {
-    let { userid } = req.session;
-    if (userid) {
-      console.log("user:", userid);
+    let { id } = req.params;
+    if (id) {
       user
         .findOne({
           where: {
-            id: userid.id,
+            id: id,
           },
         })
         .then((data) => {
