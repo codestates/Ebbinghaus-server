@@ -1,5 +1,5 @@
-const { user } = require("../../models");
-const { mineWord } = require("../../models");
+const { mineWord, user } = require("../../models");
+const sequelize = require("sequelize");
 
 // 등록단어: minewords에서 등록한 단어
 //  Test: 오늘 테스트할 단어
@@ -10,27 +10,44 @@ module.exports = {
   get: async (req, res) => {
     let { userid } = req.session;
     if (userid) {
-      let data = await user.findOne({
-        where: { id: userid },
-        include: [
-          {
-            model: mineWord,
+      user
+        .findOne({
+          where: {
+            id: userid.id,
           },
+        })
+        .then((data) => {
+          res.status(200).json(data.id);
+        });
 
-          {
-            model: mineWord,
-            include: {
-              model: word_eng,
-            },
+      //Doing
+      user
+        .findOne({
+          where: {
+            id: userid.id,
           },
-        ],
-      });
-
-      let mineWordOfUser = data.mineWords.map((val) => val.mineWord_id);
-      let userInfo = {
-        mineWord: mineWordOfUser,
-      };
-      res.status(200).json(userInfo);
+        })
+        .then((data) => {
+          mineWord
+            .findAll({
+              raw: true,
+              where: {
+                user_id: data.id,
+                distinguish: {
+                  [sequelize.Op.or]: [0, 1, 3, 7, 15, 100],
+                },
+              },
+              order: [["id", "DESC"]],
+            })
+            .then((data) => {
+              if (data) {
+                res.status(200).json(data);
+              } else {
+                res.status(404).send("잘못됬어");
+              }
+            })
+            .catch((err) => console.error("error", err));
+        });
     } else {
       res.status(404).send("session not fonud");
     }
