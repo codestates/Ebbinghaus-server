@@ -13,7 +13,7 @@ router.post("/signin", usersController.signin.post);
 router.post("/signout", usersController.signout.post);
 
 // *GET /user/mypage
-router.get("/mypage", usersController.mypage.get);
+router.get("/mypage", authMiddleware, usersController.mypage.get);
 
 // *POST /user/refresh
 router.post("/refresh", authMiddleware, usersController.refresh.post);
