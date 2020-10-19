@@ -1,8 +1,5 @@
 "use strict";
-const { hooksController } = require("../lib");
-
 const { Model } = require("sequelize");
-
 module.exports = (sequelize, DataTypes) => {
   class user extends Model {
     /**
@@ -12,30 +9,37 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.hasMany(models.mineWord, { foreignKey: "user_id" });
-      this.hasMany(models.user_priority_word, { foreignKey: "user_id" });
     }
   }
   user.init(
     {
-      name: DataTypes.STRING,
-      password: DataTypes.STRING,
-      level: DataTypes.INTEGER,
+      name: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        unique: true,
+      },
+      password: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      level: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      salt: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      access_token: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      refresh_token: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
     },
     {
-      hooks: {
-        beforeCreate: (data) => {
-          if (data.password) {
-            data.password = hooksController.password(data.password);
-          }
-        },
-        beforeFind: (data) => {
-          if (data.where.password) {
-            console.log(data.where.password);
-            data.where.password = hooksController.password(data.where.password);
-          }
-        },
-      },
       sequelize,
       modelName: "user",
     }
