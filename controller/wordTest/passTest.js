@@ -2,9 +2,9 @@ const { mineWord } = require("../../models");
 
 module.exports = {
   post: (req, res) => {
-    let { userid } = req.session;
+    let { id } = req.params;
 
-    if (userid) {
+    if (id) {
       let { word_eng } = req.body;
       var tDate = new Date();
 

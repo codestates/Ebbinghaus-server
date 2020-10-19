@@ -3,10 +3,10 @@ const { time_pass } = require("../../models");
 
 module.exports = {
   post: (req, res) => {
-    let { userid } = req.session;
+    let { id } = req.params;
     // console.log("userid", req.session.userid);
 
-    if (userid) {
+    if (id) {
       let { word_eng } = req.body;
       mineWord
         .findOne({
