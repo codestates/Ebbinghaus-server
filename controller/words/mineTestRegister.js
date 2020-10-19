@@ -7,7 +7,7 @@ module.exports = {
     // console.log("userid", req.session.userid);
     var tDate = new Date("2022-07-10 12:30");
     if (userid) {
-      let array = req.body;
+      let { array } = req.body;
       if (Array.isArray(array)) {
         for (let i = 0; i < array.length; i++) {
           mineWord

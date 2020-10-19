@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   user_priority_word.init(
     {
       user_id: DataTypes.INTEGER,
-      priority_word_id: DataTypes.STRING,
+      priority_word_id: DataTypes.INTEGER,
       distinguish: DataTypes.INTEGER,
       check_in: DataTypes.DATE,
       check_out: DataTypes.DATE,

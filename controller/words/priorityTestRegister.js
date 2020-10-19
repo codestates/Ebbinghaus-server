@@ -9,8 +9,8 @@ module.exports = {
     //해당 필드에 해당되는 priorityword테이블에서 단어 찾아서 보내기
 
     if (userid) {
-      let array = req.body;
-      console.log("바디값", req.body);
+      let { array } = req.body;
+      // console.log("바디값", req.body);
       if (Array.isArray(array)) {
         for (let i = 0; i < array.length; i++) {
           user_priority_word
