@@ -1,70 +1,38 @@
 const { mineWord } = require("../../models");
-const { time_pass } = require("../../models");
-
+const { Op } = require("sequelize");
 module.exports = {
   post: (req, res) => {
+    // let { userid } = req.session;
     // console.log("userid", req.session.userid);
-    //var tDate = new Date("2022-07-10 12:30");
-    let { selectedWords } = req.body;
+    // var tDate = new Date("2022-07-10 12:30");
+    let { selectedWords, id } = req.body;
+    let selectWord_EngList = selectedWords.map((el) => {
+      return el.word_eng;
+    });
+    console.log("selectWordList -> ", selectWord_EngList);
     if (Array.isArray(selectedWords)) {
-      for (let i = 0; i < selectedWords.length; i++) {
-        mineWord
-          .findOne({
-            where: {
-              user_id: selectedWords[i].user_id,
-              word_eng: selectedWords[i].word_eng,
-            },
-          })
-          .then((data) => {
-            console.log("data::", data);
-            //mineword distinguish 값 0으로 변경
-            if (data) {
-              mineWord.update(
-                {
-                  distinguish: 0,
-                  check_in: new Date(),
-                  check_out: new Date(),
-                  // tDate.setDate(tDate.getDate() + 1),
-                },
-                {
-                  where: {
-                    id: data.id,
-                  },
-                }
-              );
-              res.status(201).json("register test success");
-            } else {
-              res.status(400).send("잘못된 요청");
-            }
-          });
-      }
-    } else {
       mineWord
-        .findOne({
-          where: {
-            word_eng: selectedWords.word_eng,
+        .update(
+          {
+            distinguish: 0,
+            check_in: new Date(),
+            check_out: new Date(),
           },
-        })
-        .then((data) => {
-          //mineword distinguish 값 0으로 변경
-          if (data) {
-            mineWord.update(
-              {
-                distinguish: 0,
-                check_in: new Date(),
-                check_out: new Date(),
-                // tDate.setDate(tDate.getDate() + 1),
+          {
+            where: {
+              user_id: id,
+              distinguish: 99,
+              word_eng: {
+                [Op.in]: selectWord_EngList,
               },
-              {
-                where: {
-                  id: data.id,
-                },
-              }
-            );
-            res.status(201).json("register test success");
-          } else {
-            res.status(400).send("잘못된 요청");
+            },
           }
+        )
+        .then((data) => {
+          res.status(200).json(data);
+        })
+        .catch((e) => {
+          res.sendStatus(500);
         });
     }
   },

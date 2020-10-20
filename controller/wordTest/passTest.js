@@ -3,7 +3,9 @@ const { mineWord } = require("../../models");
 module.exports = {
   post: (req, res) => {
     // let { id } = req.params;
-
+    //mineword와 priorityword의 charactor 속성 넣기 문자열로 각각 넣기
+    //시더도 바꾸기
+    //charactor 구별해서 라우팅하기
     // if (id) {
     let { selectedWords } = req.body;
     var tDate = new Date();
@@ -100,7 +102,5 @@ module.exports = {
           }
         });
     });
-
-    // }
   },
 };
