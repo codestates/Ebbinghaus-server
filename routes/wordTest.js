@@ -3,7 +3,7 @@ const router = express.Router();
 const { wordTestController } = require("../controller");
 
 //시험 시작
-router.get("/", wordTestController.testing.get);
+router.get("/:id", wordTestController.testing.get);
 
 //시험 단어 통과
 

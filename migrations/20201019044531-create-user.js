@@ -15,7 +15,16 @@ module.exports = {
         type: Sequelize.STRING,
       },
       level: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
+      },
+      salt: {
+        type: Sequelize.STRING,
+      },
+      access_token: {
+        type: Sequelize.STRING,
+      },
+      refresh_token: {
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,

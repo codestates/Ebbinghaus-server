@@ -6,9 +6,9 @@ const sequelize = require("sequelize");
 //     console.log("data", data);
 module.exports = {
   get: (req, res) => {
-    let { userid } = req.session;
+    let { id } = req.params;
 
-    if (userid) {
+    if (id) {
       var aDate = new Date();
       var bDate = new Date();
       var cDate = new Date();
@@ -19,7 +19,7 @@ module.exports = {
       user
         .findOne({
           where: {
-            id: userid.id,
+            id: id,
           },
         })
         .then((data) => {
@@ -48,7 +48,7 @@ module.exports = {
       user
         .findOne({
           where: {
-            id: userid.id,
+            id: id,
           },
         })
         .then((data) => {
@@ -77,7 +77,7 @@ module.exports = {
       user
         .findOne({
           where: {
-            id: userid.id,
+            id: id,
           },
         })
         .then((data) => {
@@ -106,7 +106,7 @@ module.exports = {
       user
         .findOne({
           where: {
-            id: userid.id,
+            id: id,
           },
         })
         .then((data) => {
@@ -135,7 +135,7 @@ module.exports = {
       user
         .findOne({
           where: {
-            id: userid.id,
+            id: id,
           },
         })
         .then((data) => {
@@ -164,7 +164,7 @@ module.exports = {
       user
         .findOne({
           where: {
-            id: userid.id,
+            id: id,
           },
         })
         .then((data1) => {

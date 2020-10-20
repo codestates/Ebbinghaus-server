@@ -2,12 +2,13 @@ const { user, mineWord } = require("../../models");
 
 module.exports = {
   get: (req, res) => {
-    let { userid } = req.session;
-    if (userid) {
+    let { id } = req.params;
+
+    if (id) {
       user
         .findOne({
           where: {
-            id: userid.id,
+            id: id,
           },
         })
         .then((data) => {
