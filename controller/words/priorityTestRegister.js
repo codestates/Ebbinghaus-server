@@ -11,71 +11,44 @@ module.exports = {
     if (id) {
       let { selectedWords } = req.body;
       // console.log("바디값", req.body);
-      if (Array.isArray(selectedWords)) {
-        for (let i = 0; i < selectedWords.length; i++) {
-          user_priority_word
-            .update(
-              {
-                user_id: selectedWords[i].id,
+      // if (Array.isArray(selectedWords)) {
+      //   for (let i = 0; i < selectedWords.length; i++) {
+      //     user_priority_word
+      //       .update(
+      //         {
+      //           user_id: selectedWords[i].id,
 
-                distinguish: 0,
-
-                // tDate.setDate(tDate.getDate() + 1),
-              },
-              {
-                where: {
-                  id: data.id,
-                },
-              }
-            )
-            .then((data) => {
-              //mineword distinguish 값 0으로 변경
-              if (data) {
-                priorityword.update(
-                  {
-                    check_in: new Date(),
-                    check_out: new Date(),
-                    // tDate.setDate(tDate.getDate() + 1),
-                  },
-                  {
-                    where: {
-                      id: data.priority_word_id,
-                    },
-                  }
-                );
-
-                res.status(201).json("register test success");
-              } else {
-                res.status(400).send("잘못된 요청");
-              }
-            });
-        }
-      } else {
+      array.forEach((element) => {
         priorityWord
           .findOne({
+            raw: true,
             where: {
               word_eng: selectedWords.word_eng,
             },
           })
           .then((data) => {
-            //mineword distinguish 값 0으로 변경
-            if (data) {
-              console.log("마인워드 데이타", data.dataValues.id);
-
-              user_priority_word.create({
-                user_id: userid.id,
-                priority_word_id: data.dataValues.id,
-                distinguish: 0,
-                check_in: new Date(),
-                check_out: new Date(),
-                // tDate.setDate(tDate.getDate() + 1),
+            user_priority_word
+              .update(
+                {
+                  check_in: new Date(),
+                  check_out: new Date(),
+                  distinguish: 0,
+                },
+                {
+                  where: {
+                    priority_word_id: data.id,
+                  },
+                }
+              )
+              .then((data) => {
+                if (data) {
+                  res.status(201).json("register test success");
+                } else {
+                  res.status(400).send("잘못된 요청");
+                }
               });
-              res.status(201).json("register test success");
-            } else {
-              res.status(400).send("잘못된 요청");
-            }
           });
-      }
+      });
     }
   },
 };

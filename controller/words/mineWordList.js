@@ -21,8 +21,8 @@ module.exports = {
               },
               order: [["id", "DESC"]],
             })
-            .then((data) => {
-              if (data) {
+            .then((data1) => {
+              if (data1) {
                 res.status(200).json(data);
               } else {
                 res.status(404).send("잘못됬어");
