@@ -5,6 +5,7 @@ module.exports = {
   get: (req, res) => {
     let { id } = req.params;
     if (id) {
+      console.log("아이디", id);
       user
         .findOne({
           where: {
