@@ -290,7 +290,7 @@ module.exports = {
           );
         });
 
-      //나만의 영단어 테스트 실행
+      // 테스트 실행
       user
         .findOne({
           raw: true,
@@ -309,31 +309,8 @@ module.exports = {
                 },
               },
             })
-            .then((add) => {
-              add.forEach((element) => {
-                mineWord.update(
-                  {
-                    wrong_word: "포도",
-                    // priorityWord.findAll({
-                    //   raw: true,
-                    //   where: {
-                    //     id: {
-                    //       [sequelize.Op.or]: [2, 3, 5, 12, 17],
-                    //     },
-                    //   },
-                    //   attributes: ["word_kor"],
-                    // }),
-                  },
-                  {
-                    where: {
-                      id: element.id,
-                    },
-                  }
-                );
-              });
-            })
+
             .then((mine) => {
-              console.log("마아아아인!!!!!!!!!", mine);
               user_priority_word
                 .findAll({
                   raw: true,
@@ -354,6 +331,8 @@ module.exports = {
                   let result = array.concat(mine, priority);
 
                   if (result) {
+                    console.log("리절트!!!!!!!!!", result);
+
                     res.status(200).json(result);
                   } else {
                     res.status(400).json("fail");
@@ -364,6 +343,7 @@ module.exports = {
     }
   },
 };
+
 function getRandom(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
@@ -396,3 +376,20 @@ function getRandomArray(min, max, count) {
     return a - b;
   });
 }
+
+let mmm = priorityWord
+  .findAll({
+    raw: true,
+    where: {
+      id: {
+        [sequelize.Op.or]: [1, 2, 3, 4, 5],
+        // getRandomArray(1, 24, 5),
+      },
+    },
+    attributes: ["word_kor"],
+  })
+  .then((data) => {
+    data.forEach((element) => {
+      element.word_kor;
+    });
+  });
