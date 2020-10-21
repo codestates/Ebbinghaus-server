@@ -8,12 +8,12 @@ const sequelize = require("sequelize");
 
 module.exports = {
   get: async (req, res) => {
-    let { userid } = req.session;
-    if (userid) {
+    let { id } = req.users;
+    if (id) {
       user
-        .findOne({
+        .findById({
           where: {
-            id: userid.id,
+            id: id,
           },
         })
         .then((data) => {
@@ -22,9 +22,9 @@ module.exports = {
 
       //Doing
       user
-        .findOne({
+        .findById({
           where: {
-            id: userid.id,
+            id: id,
           },
         })
         .then((data) => {

@@ -18,4 +18,6 @@ router.get("/mypage", authMiddleware, usersController.mypage.get);
 // *POST /user/refresh
 router.post("/refresh", authMiddleware, usersController.refresh.post);
 
+router.get("/check", authMiddleware, usersController.check.get);
+
 module.exports = router;

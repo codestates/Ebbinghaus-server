@@ -4,4 +4,5 @@ module.exports = {
   signout: require("./signout"),
   mypage: require("./mypage"),
   refresh: require("./refresh"),
+  check: require("./check"),
 };
