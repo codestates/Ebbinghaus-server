@@ -2,21 +2,7 @@ const { priorityWord, user_priority_word } = require("../../models");
 
 module.exports = {
   post: (req, res) => {
-    // let { id } = req.params;
-    // console.log("userid", req.session.userid);
-    //유저 아이디 확인
-    //조인 테이블에 해당 필드 다찾기
-    //해당 필드에 해당되는 priorityword테이블에서 단어 찾아서 보내기
-
-    // if (id) {
     let { selectedWords } = req.body;
-    // console.log("바디값", req.body);
-    // if (Array.isArray(selectedWords)) {
-    //   for (let i = 0; i < selectedWords.length; i++) {
-    //     user_priority_word
-    //       .update(
-    //         {
-    //           user_id: selectedWords[i].id,
 
     selectedWords.forEach((element) => {
       priorityWord
@@ -51,6 +37,5 @@ module.exports = {
             });
         });
     });
-    // }
   },
 };

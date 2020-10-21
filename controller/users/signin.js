@@ -9,7 +9,6 @@ module.exports = {
         name,
       },
     });
-
     if (!users) {
       return res.status(404).json({
         message: "name does not exist",
@@ -40,7 +39,6 @@ module.exports = {
       httpOnly: true,
     });
     res.cookie("authType", "jwt");
-    console.log("cookie맛있어:", req.cookies);
 
     res.status(200).json({
       id,

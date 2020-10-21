@@ -1,9 +1,22 @@
+const { user } = require("../../models");
 module.exports = {
-  post: (req, res) => {
-    if (req.session.destroy()) {
-      res.status(200).send("로그아웃 되었습니다");
-    } else {
-      res.status(400).send("로그아웃 잘못된 요청");
+  post: async (req, res) => {
+    const { authType } = req.cookies;
+    if (authType === "jwt") {
+      let users = await user.update(
+        { refreshToken: null },
+        { where: { id: req.users.id } }
+      );
+      if (!users) {
+        return res.status(404).json({
+          message: "Invalid account",
+        });
+      }
+      console.log("users::", users);
+      res.clearCookie("refreshToken");
     }
+    res.status(204).json({
+      message: "Logged out successfully",
+    });
   },
 };

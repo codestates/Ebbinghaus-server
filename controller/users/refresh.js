@@ -16,7 +16,7 @@ module.exports = {
       let users = await user.findOne({
         where: {
           id: req.users.id,
-          refresh_token,
+          refresh_token: refreshToken,
         },
       });
       if (!users) {
@@ -44,8 +44,9 @@ module.exports = {
           });
         }
       }
-      const accessToken = generateToken("accessToken", users.dataValues);
+      const accessToken = generateToken("access_token", users.dataValues);
       res.status(200).json({
+        message: "accessToken success",
         accessToken,
       });
     }
