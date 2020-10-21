@@ -14,6 +14,9 @@ router.post("/mine/test-register", wordsController.mineTestRegister.post);
 // 나만의 영단어 테스트 단어 조회 버튼
 router.get("/mine/button/:id", wordsController.mineWordTestButton.get);
 
+//나만의 영단어 삭제 버튼
+router.post("/mine/delete", wordsController.mineWordDelete.post);
+
 //우선순위 영단어 리스트
 router.get("/priority/:id", wordsController.priorityWordList.get);
 
