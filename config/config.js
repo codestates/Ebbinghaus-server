@@ -9,7 +9,6 @@ module.exports = {
     dialect: "mysql",
     timezone: "+09:00",
     //port: 13306,
-
   },
   test: {
     username: "root",
@@ -17,6 +16,7 @@ module.exports = {
     database: "ebbinghaus_development",
     host: "localhost",
     dialect: "mysql",
+    timezone: "+09:00",
   },
   production: {
     username: "ebbingTeam",
@@ -24,6 +24,7 @@ module.exports = {
     database: "ebbinghausDB",
     host: "ebbinghaus.c98clmwx1rag.ap-northeast-2.rds.amazonaws.com",
     dialect: "mysql",
+    timezone: "+09:00",
     port: 13306,
   },
 };
