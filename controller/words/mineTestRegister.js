@@ -1,10 +1,7 @@
 const { mineWord } = require("../../models");
-const { time_pass } = require("../../models");
 
 module.exports = {
   post: (req, res) => {
-    // console.log("userid", req.session.userid);
-    //var tDate = new Date("2022-07-10 12:30");
     let { selectedWords } = req.body;
     if (Array.isArray(selectedWords)) {
       for (let i = 0; i < selectedWords.length; i++) {
@@ -24,7 +21,6 @@ module.exports = {
                   distinguish: 0,
                   check_in: new Date(),
                   check_out: new Date(),
-                  // tDate.setDate(tDate.getDate() + 1),
                 },
                 {
                   where: {

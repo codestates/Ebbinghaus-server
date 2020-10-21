@@ -2,16 +2,18 @@ const { mineWord } = require("../../models");
 
 module.exports = {
   post: (req, res) => {
-    let { id } = req.params;
+    // let { id } = req.params;
 
-    if (id) {
-      let { word_eng } = req.body;
-      var tDate = new Date();
-
+    // if (id) {
+    let { selectedWords } = req.body;
+    var tDate = new Date();
+    console.log("셀렉트워즈", selectedWords);
+    selectedWords.forEach((element) => {
       mineWord
         .findOne({
           where: {
-            word_eng: word_eng,
+            user_id: element.user_id,
+            word_eng: element.word_eng,
           },
         })
         .then((data) => {
@@ -97,6 +99,8 @@ module.exports = {
             res.status(400).send("잘못된 요청");
           }
         });
-    }
+    });
+
+    // }
   },
 };
