@@ -27,6 +27,6 @@ router.post(
 );
 
 // 우선순위 영단어 테스트 단어 조회 버튼
-router.get("/priority/button", wordsController.priorityWordTestButton.get);
+router.get("/priority/button/:id", wordsController.priorityWordTestButton.get);
 
 module.exports = router;

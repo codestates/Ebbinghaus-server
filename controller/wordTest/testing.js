@@ -307,10 +307,13 @@ module.exports = {
                 check_out: {
                   [sequelize.Op.lt]: new Date(),
                 },
+                distinguish: {
+                  [sequelize.Op.or]: [0, 1, 3, 7, 15, 30],
+                },
               },
             })
-
             .then((mine) => {
+              console.log("리절트!!!!!!!!!", mine);
               user_priority_word
                 .findAll({
                   raw: true,
@@ -318,6 +321,9 @@ module.exports = {
                     user_id: id,
                     check_out: {
                       [sequelize.Op.lt]: new Date(),
+                      distinguish: {
+                        [sequelize.Op.or]: [0, 1, 3, 7, 15, 30],
+                      },
                     },
                   },
                   include: {
@@ -331,8 +337,6 @@ module.exports = {
                   let result = array.concat(mine, priority);
 
                   if (result) {
-                    console.log("리절트!!!!!!!!!", result);
-
                     res.status(200).json(result);
                   } else {
                     res.status(400).json("fail");
@@ -344,52 +348,52 @@ module.exports = {
   },
 };
 
-function getRandom(min, max) {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
+// function getRandom(min, max) {
+//   return Math.floor(Math.random() * (max - min + 1) + min);
+// }
 
-function getRandomArray(min, max, count) {
-  // 종료
-  if (max - min + 1 < count) return;
+// function getRandomArray(min, max, count) {
+//   // 종료
+//   if (max - min + 1 < count) return;
 
-  // 배열 생성
-  var rst = [];
+//   // 배열 생성
+//   var rst = [];
 
-  while (1) {
-    var index = getRandom(min, max);
+//   while (1) {
+//     var index = getRandom(min, max);
 
-    // 중복 여부를 체크
-    if (rst.indexOf(index) > -1) {
-      continue;
-    }
+//     // 중복 여부를 체크
+//     if (rst.indexOf(index) > -1) {
+//       continue;
+//     }
 
-    rst.push(index);
+//     rst.push(index);
 
-    // 원하는 배열 갯수가 되면 종료
-    if (rst.length == count) {
-      break;
-    }
-  }
+//     // 원하는 배열 갯수가 되면 종료
+//     if (rst.length == count) {
+//       break;
+//     }
+//   }
 
-  // 정렬
-  return rst.sort(function (a, b) {
-    return a - b;
-  });
-}
+//   // 정렬
+//   return rst.sort(function (a, b) {
+//     return a - b;
+//   });
+// }
 
-let mmm = priorityWord
-  .findAll({
-    raw: true,
-    where: {
-      id: {
-        [sequelize.Op.or]: [1, 2, 3, 4, 5],
-        // getRandomArray(1, 24, 5),
-      },
-    },
-    attributes: ["word_kor"],
-  })
-  .then((data) => {
-    data.forEach((element) => {
-      element.word_kor;
-    });
-  });
+// let mmm = priorityWord
+//   .findAll({
+//     raw: true,
+//     where: {
+//       id: {
+//         [sequelize.Op.or]: [1, 2, 3, 4, 5],
+//         // getRandomArray(1, 24, 5),
+//       },
+//     },
+//     attributes: ["word_kor"],
+//   })
+//   .then((data) => {
+//     data.forEach((element) => {
+//       element.word_kor;
+//     });
+//   });
