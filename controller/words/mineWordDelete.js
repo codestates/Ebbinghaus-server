@@ -3,12 +3,16 @@ const { mineWord } = require("../../models");
 module.exports = {
   post: (req, res) => {
     let { selectedWords, id } = req.body;
-    console.log("셀렉트워드", selectedWords[0].word_eng);
+    let selectWord_EngList = selectedWords.map((el) => {
+      return el.word_eng;
+    });
+    console.log("셀렉트워드", selectedWords);
+
     mineWord
       .destroy({
         where: {
           user_id: id,
-          word_eng: selectedWords[0].word_eng,
+          word_eng: selectWord_EngList,
         },
       })
       .then((data) => {

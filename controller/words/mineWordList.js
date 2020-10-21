@@ -1,3 +1,4 @@
+const { user, mineWord } = require("../../models");
 module.exports = {
   get: (req, res) => {
     let { id } = req.params;

@@ -2,7 +2,7 @@ const { priorityWord, user_priority_word } = require("../../models");
 
 module.exports = {
   post: (req, res) => {
-    let { selectedWords } = req.body;
+    let { selectedWords, id } = req.body;
 
     selectedWords.forEach((element) => {
       priorityWord
@@ -16,7 +16,7 @@ module.exports = {
           user_priority_word
             .create(
               {
-                user_id: element.user_id,
+                user_id: id,
                 priority_word_id: data.id,
                 check_in: new Date(),
                 check_out: new Date(),
