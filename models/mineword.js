@@ -20,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       word_eng: DataTypes.STRING,
       word_kor: DataTypes.STRING,
       distinguish: DataTypes.INTEGER,
+      wrong_word: DataTypes.STRING,
       check_in: DataTypes.DATE,
       check_out: DataTypes.DATE,
     },

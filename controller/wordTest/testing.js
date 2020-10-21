@@ -1,4 +1,9 @@
-const { user, mineWord, time_pass } = require("../../models");
+const {
+  user,
+  mineWord,
+  user_priority_word,
+  priorityWord,
+} = require("../../models");
 const sequelize = require("sequelize");
 
 //   console.log("userid", req.session.userid);
@@ -14,6 +19,11 @@ module.exports = {
       var cDate = new Date();
       var dDate = new Date();
       var eDate = new Date();
+      var fDate = new Date();
+      var gDate = new Date();
+      var hDate = new Date();
+      var iDate = new Date();
+      var jDate = new Date();
 
       //첫번째 distinguish 낮추기
       user
@@ -160,9 +170,130 @@ module.exports = {
           }
         });
 
-      //테스트 실행
+      //우선순위 첫번째 distinguish 낮추기
       user
         .findOne({
+          where: {
+            id: id,
+          },
+        })
+        .then((data) => {
+          user_priority_word.update(
+            {
+              distinguish: 0,
+            },
+            {
+              where: {
+                user_id: data.id,
+                distinguish: 1,
+                check_out: {
+                  [sequelize.Op.lt]: fDate.setDate(fDate.getDate() - 2),
+                },
+              },
+            }
+          );
+        });
+
+      //우선순위 두번째 distinguish 낮추기
+      user
+        .findOne({
+          where: {
+            id: id,
+          },
+        })
+        .then((data) => {
+          user_priority_word.update(
+            {
+              distinguish: 1,
+            },
+            {
+              where: {
+                user_id: data.id,
+                distinguish: 3,
+                check_out: {
+                  [sequelize.Op.lt]: gDate.setDate(gDate.getDate() - 4),
+                },
+              },
+            }
+          );
+        });
+
+      //우선순위 세번째 distinguish 낮추기
+      user
+        .findOne({
+          where: {
+            id: id,
+          },
+        })
+        .then((data) => {
+          user_priority_word.update(
+            {
+              distinguish: 3,
+            },
+            {
+              where: {
+                user_id: data.id,
+                distinguish: 7,
+                check_out: {
+                  [sequelize.Op.lt]: hDate.setDate(hDate.getDate() - 8),
+                },
+              },
+            }
+          );
+        });
+
+      //우선순위 네번째 distinguish 낮추기
+      user
+        .findOne({
+          where: {
+            id: id,
+          },
+        })
+        .then((data) => {
+          user_priority_word.update(
+            {
+              distinguish: 7,
+            },
+            {
+              where: {
+                user_id: data.id,
+                distinguish: 15,
+                check_out: {
+                  [sequelize.Op.lt]: iDate.setDate(iDate.getDate() - 15),
+                },
+              },
+            }
+          );
+        });
+
+      //우선순위 다섯번째 distinguish 낮추기
+      user
+        .findOne({
+          where: {
+            id: id,
+          },
+        })
+        .then((data) => {
+          user_priority_word.update(
+            {
+              distinguish: 15,
+            },
+            {
+              where: {
+                user_id: data.id,
+                distinguish: 30,
+                check_out: {
+                  [sequelize.Op.lt]: jDate.setDate(jDate.getDate() - 28),
+                },
+              },
+            }
+          );
+        });
+
+      //나만의 영단어 테스트 실행
+      user
+        .findOne({
+          raw: true,
           where: {
             id: id,
           },
@@ -176,68 +307,92 @@ module.exports = {
                 check_out: {
                   [sequelize.Op.lt]: new Date(),
                 },
-                // check_out: < new Date()
               },
-              // where: {  checkout: 0, },
             })
-            .then((data2) => {
-              // console.log("체크아웃", data2);
-              if (data2) {
-                res.status(200).json(data2);
-              } else {
-                res.status(404).send("잘못됬어");
-              }
+            .then((add) => {
+              add.forEach((element) => {
+                mineWord.update(
+                  {
+                    wrong_word: "포도",
+                    // priorityWord.findAll({
+                    //   raw: true,
+                    //   where: {
+                    //     id: {
+                    //       [sequelize.Op.or]: [2, 3, 5, 12, 17],
+                    //     },
+                    //   },
+                    //   attributes: ["word_kor"],
+                    // }),
+                  },
+                  {
+                    where: {
+                      id: element.id,
+                    },
+                  }
+                );
+              });
             })
-            .catch((err) => console.error("error", err));
-        });
+            .then((mine) => {
+              console.log("마아아아인!!!!!!!!!", mine);
+              user_priority_word
+                .findAll({
+                  raw: true,
+                  where: {
+                    user_id: id,
+                    check_out: {
+                      [sequelize.Op.lt]: new Date(),
+                    },
+                  },
+                  include: {
+                    model: priorityWord,
+                    attributes: ["word_eng", "word_kor"],
+                  },
+                  attributes: ["id"],
+                })
+                .then((priority) => {
+                  let array = [];
+                  let result = array.concat(mine, priority);
 
-      //   });
+                  if (result) {
+                    res.status(200).json(result);
+                  } else {
+                    res.status(400).json("fail");
+                  }
+                });
+            });
+        });
     }
   },
 };
+function getRandom(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
 
-//일단 time passes에 있는 모든값을 부르기
-//가져올 단어는 timepassed.mineword_id의 필드!
+function getRandomArray(min, max, count) {
+  // 종료
+  if (max - min + 1 < count) return;
 
-// SELECT DATE_ADD(NOW(), INTERVAL data.distingush DAY);
-// 3. 클라이언트가 테스트 실행을 하게되면 서버는 time_passed안에 있는 영단어 중
-//  checkout을 검토(checkout이 지금 날짜보다 이전인 경우)하여
-//  오늘 테스트 해야 하는 단어를 클라이언트에게 보낸다.
+  // 배열 생성
+  var rst = [];
 
-// console.log("userid", req.session.userid);
-//       //   time_pass
-//       //     .findAll({ raw: true })
-//       //     .then((data) => {
-//       console.log("data", data);
-//       mineWord
-//         .findAll({
-//           where: {
-//             id: 1,
-//           },
-//         })
-//         // })
-//         .then((data) => {
-//           if (data) {
-//             res.status(200).json(data);
-//           } else {
-//             res.status(404).send("잘못됬어");
-//           }
-//         })
-//         .catch((err) => console.error("error", err));
+  while (1) {
+    var index = getRandom(min, max);
 
-// const insertCheckout = async (data2) => {
-//   await data2.forEach((checkOutName) => {
-//     if (checkOutName) {
-//       mineWord
-//         .findOne({
-//           raw: true,
-//           where: {
-//             check_out: checkOutName,
-//           },
-//         })
-//         .then((data) => {
-//           return data.check_out;
-//         });
-//     }
-//   });
-// };
+    // 중복 여부를 체크
+    if (rst.indexOf(index) > -1) {
+      continue;
+    }
+
+    rst.push(index);
+
+    // 원하는 배열 갯수가 되면 종료
+    if (rst.length == count) {
+      break;
+    }
+  }
+
+  // 정렬
+  return rst.sort(function (a, b) {
+    return a - b;
+  });
+}

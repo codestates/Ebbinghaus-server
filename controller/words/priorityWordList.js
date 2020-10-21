@@ -16,25 +16,15 @@ module.exports = {
         res.sendStatus(500);
       });
 
-    // user
-    //   .findOne({
-    //     where: {
-    //       id: id,
-    //     },
-    //   })
-    //   .then((data) => {
     user_priority_word.findAll({
       raw: true,
       where: {
-        // user_id: data.id,
         distinguish: null,
       },
       include: {
         model: priorityWord,
         attributes: ["word_eng", "word_kor"],
       },
-      // attributes: ["id"],
     });
-    // });
   },
 };
