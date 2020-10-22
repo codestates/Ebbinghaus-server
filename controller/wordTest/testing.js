@@ -313,7 +313,6 @@ module.exports = {
               },
             })
             .then((mine) => {
-              console.log("리절트!!!!!!!!!", mine);
               user_priority_word
                 .findAll({
                   raw: true,
@@ -321,9 +320,9 @@ module.exports = {
                     user_id: id,
                     check_out: {
                       [sequelize.Op.lt]: new Date(),
-                      distinguish: {
-                        [sequelize.Op.or]: [0, 1, 3, 7, 15, 30],
-                      },
+                    },
+                    distinguish: {
+                      [sequelize.Op.or]: [0, 1, 3, 7, 15, 30],
                     },
                   },
                   include: {
@@ -333,6 +332,7 @@ module.exports = {
                   attributes: ["id"],
                 })
                 .then((priority) => {
+                  console.log("리절트!!!!!!!!!", priority);
                   let array = [];
                   let result = array.concat(mine, priority);
 
