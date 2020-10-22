@@ -20,9 +20,6 @@ module.exports = {
       distinguish: {
         type: Sequelize.INTEGER,
       },
-      wrong_word: {
-        type: Sequelize.STRING,
-      },
       check_in: {
         type: Sequelize.DATE,
       },
