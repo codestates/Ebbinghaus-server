@@ -17,6 +17,9 @@ router.get("/mine/button/:id", wordsController.mineWordTestButton.get);
 //나만의 영단어 삭제 버튼
 router.post("/mine/delete", wordsController.mineWordDelete.post);
 
+//나만의 영단어 테스트단어 삭제 버튼
+router.post("/mine/test-delete", wordsController.mineTestWordDelete.post);
+
 //우선순위 영단어 리스트
 router.get("/priority/:id", wordsController.priorityWordList.get);
 
@@ -28,5 +31,11 @@ router.post(
 
 // 우선순위 영단어 테스트 단어 조회 버튼
 router.get("/priority/button/:id", wordsController.priorityWordTestButton.get);
+
+//우선순위 테스트 영단어 삭제 버튼
+router.post(
+  "/priority/test-delete",
+  wordsController.priorityTestWordDelete.post
+);
 
 module.exports = router;
