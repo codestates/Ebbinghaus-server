@@ -5,14 +5,12 @@ const {
   priorityWord,
 } = require("../../models");
 const sequelize = require("sequelize");
-
 //   console.log("userid", req.session.userid);
 //   time_pass.findAll({ raw: true }).then((data) => {
 //     console.log("data", data);
 module.exports = {
   get: (req, res) => {
     let { id } = req.params;
-
     if (id) {
       var aDate = new Date();
       var bDate = new Date();
@@ -24,7 +22,6 @@ module.exports = {
       var hDate = new Date();
       var iDate = new Date();
       var jDate = new Date();
-
       //첫번째 distinguish 낮추기
       user
         .findOne({
@@ -53,7 +50,6 @@ module.exports = {
             // console.log("data5", data5);
           }
         });
-
       //두번째 distinguish 낮추기
       user
         .findOne({
@@ -82,7 +78,6 @@ module.exports = {
             // console.log("data5", data5);
           }
         });
-
       //세번째 distinguish 낮추기
       user
         .findOne({
@@ -111,7 +106,6 @@ module.exports = {
             // console.log("data5", data5);
           }
         });
-
       //네번째 distinguish 낮추기
       user
         .findOne({
@@ -140,7 +134,6 @@ module.exports = {
             // console.log("data5", data5);
           }
         });
-
       //다섯번째 distinguish 낮추기
       user
         .findOne({
@@ -169,7 +162,6 @@ module.exports = {
             // console.log("data5", data5);
           }
         });
-
       //우선순위 첫번째 distinguish 낮추기
       user
         .findOne({
@@ -193,7 +185,6 @@ module.exports = {
             }
           );
         });
-
       //우선순위 두번째 distinguish 낮추기
       user
         .findOne({
@@ -217,7 +208,6 @@ module.exports = {
             }
           );
         });
-
       //우선순위 세번째 distinguish 낮추기
       user
         .findOne({
@@ -241,7 +231,6 @@ module.exports = {
             }
           );
         });
-
       //우선순위 네번째 distinguish 낮추기
       user
         .findOne({
@@ -265,7 +254,6 @@ module.exports = {
             }
           );
         });
-
       //우선순위 다섯번째 distinguish 낮추기
       user
         .findOne({
@@ -289,7 +277,6 @@ module.exports = {
             }
           );
         });
-
       // 테스트 실행
       user
         .findOne({
@@ -313,29 +300,30 @@ module.exports = {
               },
             })
             .then((mine) => {
-              user_priority_word
+              console.log("마인!!!!!!!!!", mine);
+              priorityWord
                 .findAll({
-                  raw: true,
-                  where: {
-                    user_id: id,
-                    check_out: {
-                      [sequelize.Op.lt]: new Date(),
-                    },
-                    distinguish: {
-                      [sequelize.Op.or]: [0, 1, 3, 7, 15, 30],
-                    },
-                  },
                   include: {
-                    model: priorityWord,
-                    attributes: ["word_eng", "word_kor"],
+                    model: user_priority_word,
+                    where: {
+                      user_id: id,
+                      check_out: {
+                        [sequelize.Op.lt]: new Date(),
+                      },
+                      distinguish: {
+                        [sequelize.Op.or]: [0, 1, 3, 7, 15, 30],
+                      },
+                    },
                   },
-                  attributes: ["id"],
                 })
                 .then((priority) => {
-                  console.log("리절트!!!!!!!!!", priority);
+                  priority = JSON.parse(JSON.stringify(priority)).map((el) => {
+                    delete el.user_priority_words;
+                    return el;
+                  });
                   let array = [];
                   let result = array.concat(mine, priority);
-
+                  // console.log("리절트!!!!!!!!!", result);
                   if (result) {
                     res.status(200).json(result);
                   } else {
@@ -347,40 +335,31 @@ module.exports = {
     }
   },
 };
-
 // function getRandom(min, max) {
 //   return Math.floor(Math.random() * (max - min + 1) + min);
 // }
-
 // function getRandomArray(min, max, count) {
 //   // 종료
 //   if (max - min + 1 < count) return;
-
 //   // 배열 생성
 //   var rst = [];
-
 //   while (1) {
 //     var index = getRandom(min, max);
-
 //     // 중복 여부를 체크
 //     if (rst.indexOf(index) > -1) {
 //       continue;
 //     }
-
 //     rst.push(index);
-
 //     // 원하는 배열 갯수가 되면 종료
 //     if (rst.length == count) {
 //       break;
 //     }
 //   }
-
 //   // 정렬
 //   return rst.sort(function (a, b) {
 //     return a - b;
 //   });
 // }
-
 // let mmm = priorityWord
 //   .findAll({
 //     raw: true,
