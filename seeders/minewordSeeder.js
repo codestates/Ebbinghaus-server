@@ -3,7 +3,7 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert(
-      "MineWords",
+      "mineWords",
       [
         {
           user_id: 1,
@@ -11,7 +11,6 @@ module.exports = {
           word_kor: "하나",
           distinguish: 99,
           word_theme: "mine",
-          check_in: null,
           check_out: null,
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -22,7 +21,6 @@ module.exports = {
           word_kor: "둘",
           distinguish: 99,
           word_theme: "mine",
-          check_in: null,
           check_out: null,
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -33,7 +31,6 @@ module.exports = {
           word_kor: "셋",
           distinguish: 99,
           word_theme: "mine",
-          check_in: null,
           check_out: null,
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -44,7 +41,6 @@ module.exports = {
           word_kor: "넷",
           distinguish: 99,
           word_theme: "mine",
-          check_in: null,
           check_out: null,
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -55,7 +51,6 @@ module.exports = {
           word_kor: "다섯",
           distinguish: 99,
           word_theme: "mine",
-          check_in: null,
           check_out: null,
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -66,7 +61,6 @@ module.exports = {
           word_kor: "여섯",
           distinguish: 99,
           word_theme: "mine",
-          check_in: null,
           check_out: null,
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -77,7 +71,6 @@ module.exports = {
           word_kor: "일곱",
           distinguish: 99,
           word_theme: "mine",
-          check_in: null,
           check_out: null,
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -88,7 +81,6 @@ module.exports = {
           word_kor: "여덟",
           distinguish: 99,
           word_theme: "mine",
-          check_in: null,
           check_out: null,
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -97,16 +89,5 @@ module.exports = {
       {}
     );
   },
-  down: async (queryInterface, Sequelize) => {
-    const Op = Sequelize.Op;
-    return queryInterface.bulkDelete(
-      "PriorityWords",
-      {
-        word_eng: {
-          [Op.in]: ["one", "two", "three", "four"],
-        },
-      },
-      {}
-    );
-  },
+  down: async (queryInterface, Sequelize) => {},
 };

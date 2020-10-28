@@ -3,7 +3,7 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert(
-      "PriorityWords",
+      "priorityWords",
       [
         {
           word_eng: "talk",
@@ -3138,16 +3138,5 @@ module.exports = {
       {}
     );
   },
-  down: async (queryInterface, Sequelize) => {
-    const Op = Sequelize.Op;
-    return queryInterface.bulkDelete(
-      "PriorityWords",
-      {
-        word_eng: {
-          [Op.in]: ["give", "who", "use", "right"],
-        },
-      },
-      {}
-    );
-  },
+  down: async (queryInterface, Sequelize) => {},
 };
