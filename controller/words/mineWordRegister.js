@@ -6,6 +6,7 @@ module.exports = {
       user_id: req.body.user_id,
       word_eng: req.body.word_eng,
       word_kor: req.body.word_kor,
+      word_theme: "mine",
       distinguish: 99,
     });
     if (data) {
