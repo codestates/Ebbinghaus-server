@@ -298,6 +298,13 @@ module.exports = {
                   [sequelize.Op.or]: [0, 1, 3, 7, 15, 30],
                 },
               },
+              attributes: [
+                ["id", "word_id"],
+                "user_id",
+                "word_eng",
+                "word_kor",
+                "word_theme",
+              ],
             })
             .then((mine) => {
               console.log("마인!!!!!!!!!", mine);
@@ -314,6 +321,18 @@ module.exports = {
                         [sequelize.Op.or]: [0, 1, 3, 7, 15, 30],
                       },
                     },
+                  },
+                  attributes: {
+                    include: [
+                      [
+                        sequelize.literal(
+                          `(SELECT id FROM user_priority_words WHERE user_id = ${id} and check_out < curtime()
+                           and distinguish in (0, 1, 3, 7, 15, 30)
+                           and priority_word_id = priorityWord.id)`
+                        ),
+                        "word_id",
+                      ],
+                    ],
                   },
                 })
                 .then((priority) => {

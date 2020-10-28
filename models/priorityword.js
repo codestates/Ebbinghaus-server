@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       word_eng: DataTypes.STRING,
       word_kor: DataTypes.STRING,
+      word_theme: DataTypes.STRING,
     },
     {
       sequelize,
