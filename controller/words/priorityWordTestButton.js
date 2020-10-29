@@ -1,4 +1,9 @@
-const { user, priorityWord, user_priority_word } = require("../../models");
+const {
+  user,
+  priorityWord,
+  user_priority_word,
+  mineWord,
+} = require("../../models");
 const sequelize = require("sequelize");
 
 module.exports = {
@@ -7,26 +12,45 @@ module.exports = {
   get: (req, res) => {
     let { id } = req.params;
     console.log("id == : ", id);
-    user_priority_word
+
+    priorityWord
       .findAll({
-        raw: true,
-        where: {
-          user_id: id,
-          distinguish: {
-            [sequelize.Op.or]: [0, 1, 3, 7, 15, 100],
+        include: {
+          model: user_priority_word,
+          where: {
+            user_id: id,
+
+            distinguish: {
+              [sequelize.Op.or]: [0, 1, 3, 7, 15, 30, 100],
+            },
           },
         },
-        include: {
-          model: priorityWord,
-          attributes: ["word_eng", "word_kor"],
+        attributes: {
+          include: [
+            [
+              sequelize.literal(
+                `(SELECT id FROM user_priority_words WHERE user_id = ${id} 
+                       and distinguish in (0, 1, 3, 7, 15, 30, 100)
+                       and priority_word_id = priorityWord.id)`
+              ),
+              "id",
+            ],
+          ],
         },
-        attributes: ["id"],
       })
-      .then((result) => {
-        res.status(200).json(result);
-      })
-      .catch((e) => {
-        res.sendStatus(500);
+      .then((priority) => {
+        priority = JSON.parse(JSON.stringify(priority)).map((el) => {
+          delete el.user_priority_words;
+          return el;
+        });
+        let array = [];
+        let result = array.concat(priority);
+        // console.log("리절트!!!!!!!!!", result);
+        if (result) {
+          res.status(200).json(result);
+        } else {
+          res.status(400).json("fail");
+        }
       });
   },
 };
