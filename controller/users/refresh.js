@@ -46,7 +46,7 @@ module.exports = {
       }
       const accessToken = generateToken("access_token", users.dataValues);
       res.status(200).json({
-        message: "accessToken success",
+        message: "Access Token Issuance Success",
         accessToken,
       });
     }
