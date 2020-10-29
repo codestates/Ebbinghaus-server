@@ -14,6 +14,9 @@ module.exports = {
       word_kor: {
         type: Sequelize.STRING,
       },
+      word_theme: {
+        type: Sequelize.STRING,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

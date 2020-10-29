@@ -18,7 +18,6 @@ module.exports = (sequelize, DataTypes) => {
       user_id: DataTypes.INTEGER,
       priority_word_id: DataTypes.INTEGER,
       distinguish: DataTypes.INTEGER,
-      check_in: DataTypes.DATE,
       check_out: DataTypes.DATE,
     },
     {

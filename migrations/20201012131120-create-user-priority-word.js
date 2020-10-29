@@ -17,9 +17,6 @@ module.exports = {
       distinguish: {
         type: Sequelize.INTEGER,
       },
-      check_in: {
-        type: Sequelize.DATE,
-      },
       check_out: {
         type: Sequelize.DATE,
       },
