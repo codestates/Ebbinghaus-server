@@ -6,4 +6,5 @@ module.exports = {
   donetested: require("./doneTested"),
   beingtested: require("./beingTested"),
   refresh: require("./refresh"),
+  check: require("./check"),
 };

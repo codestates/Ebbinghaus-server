@@ -24,4 +24,6 @@ router.get("/beingtested", authMiddleware, usersController.beingtested.get);
 // *POST /user/refresh
 router.post("/refresh", authMiddleware, usersController.refresh.post);
 
+router.get("/check", authMiddleware, usersController.check.get);
+
 module.exports = router;

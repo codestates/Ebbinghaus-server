@@ -47,7 +47,7 @@ module.exports = {
 
               let testing = minetesting.count + prioritytesting.count;
               array.push(testing);
-
+              array.push(data.name);
               if (array) {
                 res.status(200).json(array);
               } else {
