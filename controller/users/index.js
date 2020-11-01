@@ -7,4 +7,5 @@ module.exports = {
   beingtested: require("./beingTested"),
   refresh: require("./refresh"),
   check: require("./check"),
+  authin: require("./authin"),
 };

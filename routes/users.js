@@ -26,4 +26,6 @@ router.post("/refresh", authMiddleware, usersController.refresh.post);
 
 router.get("/check", authMiddleware, usersController.check.get);
 
+router.post("/authin", usersController.authin.post);
+
 module.exports = router;
